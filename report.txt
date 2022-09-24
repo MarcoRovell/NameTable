@@ -1,0 +1,56 @@
+---
+
+I created an open hash table using a vector where each index is a list of buckets. I declared it as vector<list<bucket>>.
+I checked my current scope with a vector of strings. It uses an empty string to define the barrier between two different
+declared scopes. Other than that, I just created a node struct that contained the line number and id. 
+
+---
+
+The time complexity of my functions are as follows:
+enterScope is constant time
+exitScope is linear as well with the number of values exiting the scope
+declare is linear to the extent of the values in the current scope, checking to see if we've declared already.
+placing a new value in the hashTable is constant time
+Find is also linear, but since our load factor is going to be about 10 for a 200k line of code, it will be very short
+
+---
+
+exitScope:
+while currentScope is not empty and the back of currentScope is not an empty string
+	create an index with the id at the back of currentScope using mapFunc
+	pop the front of the index in hashTable
+	pop the back of currentScope
+if currentScope is empty, return false
+pop the back of currentScope
+return true
+
+declare:
+if id is empty return false
+i equals currentScope's size	
+while i is greater than 0
+	i--
+	if currentScope at i is empty, break
+	if currentScope at i is equal to id, return false
+***loop ends here***
+pushback given id to currentScope
+create index using mapFunc on given id
+create a node
+node's line and name are equal to given parameters
+pushfront the node we created at hashTable[index]
+return true
+
+find:
+if id is empty string return false
+create index using mapFunc on given id
+loop through list at hashTable's index using a const iterator
+	if dereferenced iterator's name equals id
+		return derefernced iterator's line
+***loop ends here***
+return -1
+
+---
+
+at first i tried creating an open hashtable with BST's at each index, but implementing that 
+would have been more difficult, and deleting the correct node's from the bst was much more difficult
+than simply push_front in std::list. it would be much faster, but I had already reached the required time
+so I did not worry too much. I settled for a vector of lists of nodes.
