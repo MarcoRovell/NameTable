@@ -6,3 +6,5 @@ Some important information about the project:
   - Correctly labels an identifiers scope as well as removing them once the identifier’s scope ends
   
  This NameTable project was created for Spring '22 CS32 taught by David Smallberg.
+
+Disclaimer: The desired time of ~12 milliseconds was accomplished on UCLA's Linux fast servers
